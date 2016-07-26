@@ -1,0 +1,19 @@
+@import 'base';
+.container {
+    background-color: red;
+}
+
+#sidebar {
+    width: 30vw;
+    height: 100vh;
+    background-color: black;
+    float: left;
+    clear: all;
+}
+
+#content {
+    float: right;
+    width: 70vw;
+    height: 100vh;
+    background-color: blue;
+}
