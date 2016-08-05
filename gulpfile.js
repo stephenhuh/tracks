@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const gutil = require('gulp-util');
 const sass = require('gulp-sass');
 const browserSync = require('browser-sync').create();
+const pug = require('gulp-pug');
 
 gulp.task('test', function(){
 	console.log("Hello there... your GULPJS is working!");
@@ -27,6 +28,16 @@ gulp.task('sass', function(){
 		}));
 });
 
+gulp.task('pug', function(){
+	gutil.log(gutil.colors.red("Converting Pug to HTML..."));
+	return gulp.src('app/**/*.pug')
+		.pipe(pug())
+		.pipe(gulp.dest('app/'))
+		.pipe(browserSync.reload({
+			stream: true
+		}));
+});
+
 //TODO Change baseDir appropriately
 gulp.task('browserSync', function(){
 	browserSync.init({
@@ -39,7 +50,7 @@ gulp.task('browserSync', function(){
 gulp.task('watch', ['browserSync'], function(){
 	//on file change - run sass task
 	gulp.watch('app/sass/**/*.sass', ['log-sass', 'sass']);
-	gulp.watch('app/*.html', ['log-html', browserSync.reload]);
+  gulp.watch('app/**/*.pug', ['pug', browserSync.reload]);
 });
 
 
